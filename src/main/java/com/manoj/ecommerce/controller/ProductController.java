@@ -7,7 +7,6 @@ import com.manoj.ecommerce.repository.ProductRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ProductController {
@@ -28,16 +27,19 @@ public class ProductController {
             String keyword,
             Model model) {
 
-        if(keyword != null &&
-                !keyword.isEmpty())
-        {
+        if (keyword != null && !keyword.isEmpty()) {
+
             model.addAttribute("products",
                     productRepository.findByNameContaining(keyword));
-        }
-        else
-        {
+
+            model.addAttribute("showCarousel", false);
+
+        } else {
+
             model.addAttribute("products",
                     productRepository.findAll());
+
+            model.addAttribute("showCarousel", true);
         }
 
         model.addAttribute("cartCount",
