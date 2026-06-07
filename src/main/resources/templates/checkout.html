@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+
+    <h1>Checkout</h1>
+
+    <div class="card p-4">
+
+        <h3 th:text="${product.name}"></h3>
+
+        <p th:text="${product.description}"></p>
+
+        <h4>
+            ₹ <span th:text="${product.price}"></span>
+        </h4>
+
+        <hr>
+
+        <form th:action="@{/place-order/{id}(id=${product.id})}"
+              method="post">
+
+            <label>Name</label>
+            <input type="text"
+                   name="customerName"
+                   class="form-control"
+                   required>
+
+            <br>
+
+            <label>Address</label>
+            <textarea name="address"
+                      class="form-control"
+                      required></textarea>
+
+            <br>
+
+            <label>Phone Number</label>
+            <input type="text"
+                   name="phoneNumber"
+                   class="form-control"
+                   required>
+
+            <br>
+
+            <label>Payment Method</label>
+
+            <select name="paymentMethod"
+                    class="form-select">
+
+                <option>UPI</option>
+                <option>Credit Card</option>
+                <option>Debit Card</option>
+                <option>Cash On Delivery</option>
+
+            </select>
+
+            <br>
+
+            <button type="submit"
+                    class="btn btn-success">
+                Place Order
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
