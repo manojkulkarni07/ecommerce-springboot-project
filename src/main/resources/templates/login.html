@@ -1,29 +1,124 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <style>
+        body{
+            background: linear-gradient(135deg,#11998e,#38ef7d);
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .login-card{
+            width:450px;
+            border:none;
+            border-radius:20px;
+            overflow:hidden;
+            animation:slideUp 0.8s ease;
+        }
+
+        .login-card:hover{
+            transform:translateY(-5px);
+            transition:0.3s;
+        }
+
+        .card-header{
+            background:#198754;
+            color:white;
+            text-align:center;
+            padding:20px;
+        }
+
+        .btn-login{
+            transition:0.3s;
+        }
+
+        .btn-login:hover{
+            transform:scale(1.05);
+        }
+
+        @keyframes slideUp{
+            from{
+                opacity:0;
+                transform:translateY(50px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
 
-<h1>User Login</h1>
+<div class="card shadow-lg login-card">
 
-<form action="/login" method="post">
+    <div class="card-header">
+        <h2>Welcome Back</h2>
+        <p class="mb-0">Login To Your Account</p>
+    </div>
 
-    <label>Email:</label>
-    <input type="email" name="email">
+    <div class="card-body p-4">
 
-    <br><br>
+        <form action="/login"
+              method="post">
 
-    <label>Password:</label>
-    <input type="password" name="password">
+            <div class="mb-3">
 
-    <br><br>
+                <label class="form-label">
+                    Email
+                </label>
 
-    <button type="submit">
-        Login
-    </button>
+                <input type="email"
+                       name="email"
+                       class="form-control"
+                       required>
 
-</form>
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Password
+                </label>
+
+                <input type="password"
+                       name="password"
+                       class="form-control"
+                       required>
+
+            </div>
+
+            <button type="submit"
+                    class="btn btn-success w-100 btn-login">
+
+                Login
+
+            </button>
+
+        </form>
+
+        <hr>
+
+        <div class="text-center">
+
+            Don't have an account?
+
+            <a href="/register">
+                Register
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 </html>
