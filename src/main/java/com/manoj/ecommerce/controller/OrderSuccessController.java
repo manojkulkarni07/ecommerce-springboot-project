@@ -34,8 +34,8 @@ public class OrderSuccessController {
         Product product =
                 productRepository.findById(id).orElse(null);
 
-        if(product != null)
-        {
+        if (product != null) {
+
             Order order = new Order();
 
             order.setCustomerName(customerName);
@@ -53,9 +53,31 @@ public class OrderSuccessController {
 
         return "order-success";
     }
-    @GetMapping("/place-order")
-    public String placeCartOrder()
-    {
+
+    @PostMapping("/place-order")
+    public String placeCartOrder(
+            @RequestParam String customerName,
+            @RequestParam String address,
+            @RequestParam String phoneNumber,
+            @RequestParam String paymentMethod) {
+
+        var cartItems = cartRepository.findAll();
+
+        for (var item : cartItems) {
+
+            Order order = new Order();
+
+            order.setCustomerName(customerName);
+            order.setAddress(address);
+            order.setPhoneNumber(phoneNumber);
+            order.setPaymentMethod(paymentMethod);
+
+            order.setProductName(item.getProductName());
+            order.setPrice(item.getPrice());
+
+            orderRepository.save(order);
+        }
+
         cartRepository.deleteAll();
 
         return "order-success";
